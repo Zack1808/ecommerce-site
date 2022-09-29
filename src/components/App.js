@@ -1,9 +1,14 @@
 import React from 'react';
 
+// Importing the costume made components
+import Products from './Products/Products';
+
 // Creating the App component
 const App = () => {
     return (
-        <div>App</div>
+        <div>
+            <Products />
+        </div>
     )
 }
 
