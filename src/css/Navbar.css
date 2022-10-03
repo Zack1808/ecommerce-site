@@ -9,6 +9,7 @@
     align-items: center;
     max-height: 100px;
     box-shadow: 0 8px 10px -2px #ccc;
+    background-color: #fff;
 }
 
 .logo {
