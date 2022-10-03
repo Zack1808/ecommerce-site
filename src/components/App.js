@@ -26,12 +26,10 @@ const App = () => {
         setProducts(data)
     }
 
-    console.log(products)
-
     return (
         <div className='container'>
             <Navbar />
-            <Products />
+            <Products products={products} />
         </div>
     )
 }

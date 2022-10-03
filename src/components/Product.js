@@ -8,14 +8,14 @@ export const Product = ({ product }) => {
 
     return (
         <div className="card">
-            <div className="card-header" style={{ backgroundImage: `url(${product.image})`}}>
+            <div className="card-header" style={{ backgroundImage: `url(${product.image.url})`}}>
             </div>
             <div className="card-body">
                 <div className="card-body-title">
-                    <h1>{product.name}</h1>
-                    <h1>{product.price}</h1>
+                    <h2>{product.name}</h2>
+                    <h2>{product.price.formatted_with_code}</h2>
                 </div>
-                <h4>{product.desc}</h4>
+                <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
             </div>
             <div className="card-footer">
                 <button>

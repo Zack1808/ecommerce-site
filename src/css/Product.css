@@ -16,7 +16,7 @@
 .card-header{
     width: 100%;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 50%;
     background-position: center;
     aspect-ratio: 16/9;
     border-top-left-radius: 10px;
@@ -32,12 +32,21 @@
     align-items: flex-start;
 }
 
+.card-body p {
+    font-size: calc(1em + .1vw);
+    color: #aaa
+}
+
 .card-body-title {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 30px;
+}
+
+.card-body-title h2 {
+    font-size: calc(1.6em + .1vw)
 }
 
 .card-footer {
