@@ -1,19 +1,37 @@
-.navigation {
-    box-shadow: none;
-    border-bottom: 1px solid rgba(0, 0, 0, .12);
-}
-
-.title {
+.navbar {
     display: flex;
-    flex-grow: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 40px;
+    justify-content: space-between;
     align-items: center;
-    text-decoration: none;
+    max-height: 100px;
+    box-shadow: 0 8px 10px -2px #ccc;
 }
 
-.image {
+.logo {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    height: 30px;
     margin-right: 10px;
 }
 
-.grow {
-    flex-grow: 1;
+.buttons button {
+    background: none;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background-color .5s, transform .5s;
+}
+
+.buttons button:hover {
+    background-color: #ccc;
+    transform: scale(1.1)
 }
