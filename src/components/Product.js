@@ -1,5 +1,4 @@
 import React from 'react'
-import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@mui/material';
 import { AddShoppingCart } from '@mui/icons-material';
 
 // Importing the style file
@@ -8,27 +7,22 @@ import '../css/Product.css';
 export const Product = ({ product }) => {
 
     return (
-        <Card className="root">
-            <CardMedia className="media" image={product.image} title={product.name} /> 
-            <CardContent>
-                <div className="card-content">
-                    <Typography variant="h5" gutterBottom>
-                        {product.name}
-                    </Typography>
-                    <Typography variant="h5">
-                        {product.price}
-                    </Typography>
+        <div className="card">
+            <div className="card-header" style={{ backgroundImage: `url(${product.image})`}}>
+            </div>
+            <div className="card-body">
+                <div className="card-body-title">
+                    <h1>{product.name}</h1>
+                    <h1>{product.price}</h1>
                 </div>
-                <Typography variant="body2" color="textSecondary">
-                    {product.desc}
-                </Typography>
-            </CardContent>
-            <CardActions disableSpacing className="card-actions">
-                <IconButton aria-label="Add to Cart">
+                <h4>{product.desc}</h4>
+            </div>
+            <div className="card-footer">
+                <button>
                     <AddShoppingCart />
-                </IconButton>
-            </CardActions>
-        </Card>
+                </button>
+            </div>
+        </div>
     )
 }
 

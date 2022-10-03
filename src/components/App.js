@@ -4,10 +4,13 @@ import React from 'react';
 import Products from './Products';
 import Navbar from './Navbar';
 
+// Importing the style file
+import "../css/App.css";
+
 // Creating the App component
 const App = () => {
     return (
-        <div>
+        <div className='container'>
             <Navbar />
             <Products />
         </div>
