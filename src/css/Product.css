@@ -6,6 +6,11 @@
     align-items: center;
     box-shadow: 0 0 10px #ccc;
     border-radius: 10px;
+    transition: transform .5s;
+}
+
+.card:hover {
+    transform: scale(1.01);
 }
 
 .card-header{
