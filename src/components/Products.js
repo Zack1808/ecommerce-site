@@ -7,11 +7,11 @@ import Product from './Product';
 import "../css/Products.css"
 
 // Creating the Products component
-const Products = ({ products }) => {
+const Products = ({ products, onAddToCart }) => {
     return (
         <div className='product-container'>
             {
-                products && products.map(product => <Product key={product.id} product={product} />)
+                products && products.map(product => <Product key={product.id} product={product} onAddToCart={onAddToCart} />)
             }
         </div>
     )

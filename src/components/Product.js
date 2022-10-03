@@ -4,7 +4,7 @@ import { AddShoppingCart } from '@mui/icons-material';
 // Importing the style file
 import '../css/Product.css';
 
-export const Product = ({ product }) => {
+export const Product = ({ product, onAddToCart }) => {
 
     return (
         <div className="card">
@@ -18,7 +18,7 @@ export const Product = ({ product }) => {
                 <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
             </div>
             <div className="card-footer">
-                <button>
+                <button onClick={() => onAddToCart(product.id, 1)}>
                     <AddShoppingCart />
                 </button>
             </div>

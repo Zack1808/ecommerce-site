@@ -14,11 +14,26 @@ import "../css/App.css";
 const App = () => {
 
     const [products, setProducts] = useState([]); 
+    const [cart, setCart] = useState({});
 
     // Will run the function that will fetch the products
     useEffect(() => {
         fetchProducts();
+        fetchCart();
     }, []);
+
+    // Function taht will store all items that have been entered into the cart
+    const fetchCart = async() => {
+        setCart(await commerce.cart.retrieve());
+    }
+
+    // Function that will add the selected item to the cart
+    const handleCartAdding = async(id, amount) => {
+        const item = await commerce.cart.add(id, amount);
+        setCart(item);
+    }
+
+    console.log(cart)
 
     // Function that will fetch the products
     const fetchProducts = async() => {
@@ -28,8 +43,8 @@ const App = () => {
 
     return (
         <div className='container'>
-            <Navbar />
-            <Products products={products} />
+            <Navbar totalItems={cart.total_items} />
+            <Products products={products} onAddToCart={handleCartAdding}  />
         </div>
     )
 }

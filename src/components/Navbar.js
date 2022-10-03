@@ -8,7 +8,7 @@ import logo from '../images/ecommerce.png'
 // Importing the style file 
 import '../css/Navbar.css'
 
-const Navbar = () => {
+const Navbar = ({ totalItems }) => {
   return (
     <>
        <div className="navbar">
@@ -18,7 +18,7 @@ const Navbar = () => {
             </div>
             <div className="buttons">
                 <button>
-                    <Badge badgeContent={2} color="secondary">
+                    <Badge badgeContent={totalItems} color="secondary">
                         <ShoppingCart />
                     </Badge>
                 </button>
