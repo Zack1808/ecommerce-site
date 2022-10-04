@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 // Importing the costume made components
 import FilledCart from './FilledCart';
+import Loader from './Loader'
 
 // Importing the style file
 import '../css/Cart.css';
@@ -10,7 +11,7 @@ import '../css/Cart.css';
 // Creating the Cart component
 const Cart = ({ cart, onUpdateAmount, onRemoveItem, onRemoveAll }) => {
 
-  if(!cart.line_items) return 'loading'
+  if(!cart.line_items) return <Loader />
 
   return (
     <div className="cart-container">
