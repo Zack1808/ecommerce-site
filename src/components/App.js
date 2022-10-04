@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Importing the costume made components
 import Products from './Products';
@@ -41,11 +42,15 @@ const App = () => {
     }
 
     return (
-        <div className='container'>
-            <Navbar totalItems={cart.total_items} />
-            <Products products={products} onAddToCart={handleCartAdding}  />
-            <Cart cart={cart} />
-        </div>
+        <BrowserRouter basename={process.env.PUBLIC_URL}> 
+            <div className='container'>
+                <Navbar totalItems={cart.total_items} />
+                <Routes>
+                    <Route exact path='/' element={<Products products={products} onAddToCart={handleCartAdding} />}/>
+                    <Route path="/cart" element={<Cart cart={cart} />} />
+                </Routes>
+            </div>
+        </BrowserRouter>
     )
 }
 

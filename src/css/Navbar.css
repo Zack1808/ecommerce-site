@@ -15,9 +15,15 @@
 
 .logo {
     height: 100%;
+}
+
+.logo a {
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
+    color: #000;
 }
 
 .logo img {
@@ -25,15 +31,17 @@
     margin-right: 10px;
 }
 
-.navbar-buttons button {
+.navbar-buttons a {
+    display: flex;
     background: none;
     border: none;
+    color: #000;
     padding: 10px;
     border-radius: 50%;
     transition: background-color .5s, transform .5s;
 }
 
-.navbar-buttons button:hover {
+.navbar-buttons a:hover {
     background-color: #ccc;
     transform: scale(1.1)
 }

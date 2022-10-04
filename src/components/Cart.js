@@ -9,12 +9,12 @@ import '../css/Cart.css';
 // Creating the Cart component
 const Cart = ({ cart }) => {
 
-  const isEmpty = !cart.line_items.length;
+  if(!cart.line_items) return 'loading'
 
   return (
     <div className="cart-container">
-      <h2>Your shopping cart</h2>
-      { isEmpty ? <div className="empty-cart">You have no items in your cart.</div> : <FilledCart cart={cart} />}
+      <h1>Your shopping cart</h1>
+      { !cart.line_items.length ? <div className="empty-cart">You have no items in your cart.</div> : <FilledCart cart={cart} />}
       <div className="cart-details">
         <h4>Subtotal: {cart.subtotal.formatted_with_code}</h4>
         <div className="buttons">

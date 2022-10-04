@@ -2,6 +2,7 @@
   "name": "ecommerce-site",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://zack1808.github.io/ecommerce",
   "dependencies": {
     "@chec/commerce.js": "^2.8.0",
     "@emotion/react": "^11.10.4",
