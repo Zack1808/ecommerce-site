@@ -29,6 +29,24 @@ const App = () => {
         setCart(await commerce.cart.retrieve());
     }
 
+    // Function that will update the selected amount of products for the selected 
+    const handleAmountUpdate = async(id, quantity) => {
+        const updatedCart = await commerce.cart.update(id, { quantity });
+        setCart(updatedCart)
+    }
+
+    // Function that will handle the removal of the selected item
+    const handleRemoveItem = async(id) => {
+        const removedItem = await commerce.cart.remove(id);
+        setCart(removedItem)
+    }
+
+    // Function that will handle removing all items from the cart
+    const handleRemoveAll = async() => {
+        const emptyCart = await commerce.cart.empty();
+        setCart(emptyCart)
+    }
+
     // Function that will add the selected item to the cart
     const handleCartAdding = async(id, amount) => {
         const item = await commerce.cart.add(id, amount);
@@ -47,7 +65,7 @@ const App = () => {
                 <Navbar totalItems={cart.total_items} />
                 <Routes>
                     <Route exact path='/' element={<Products products={products} onAddToCart={handleCartAdding} />}/>
-                    <Route path="/cart" element={<Cart cart={cart} />} />
+                    <Route path="/cart" element={<Cart cart={cart} onUpdateAmount={handleAmountUpdate} onRemoveItem={handleRemoveItem} onRemoveAll={handleRemoveAll} />} />
                 </Routes>
             </div>
         </BrowserRouter>

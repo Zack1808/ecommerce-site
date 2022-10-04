@@ -8,14 +8,14 @@ import FilledCart from './FilledCart';
 import '../css/Cart.css';
 
 // Creating the Cart component
-const Cart = ({ cart }) => {
+const Cart = ({ cart, onUpdateAmount, onRemoveItem, onRemoveAll }) => {
 
   if(!cart.line_items) return 'loading'
 
   return (
     <div className="cart-container">
       <h1>Your shopping cart</h1>
-      { !cart.line_items.length ? <div className="empty-cart">You have no items in your cart.&nbsp;<Link to="/">Return to shop</Link></div> : <FilledCart cart={cart} />}
+      { !cart.line_items.length ? <div className="empty-cart">You have no items in your cart.&nbsp;<Link to="/">Return to shop</Link></div> : <FilledCart cart={cart} onUpdateAmount={onUpdateAmount} onRemoveAll={onRemoveAll} onRemoveItem={onRemoveItem} />}
     </div>
   )
 }

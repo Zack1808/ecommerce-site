@@ -6,18 +6,18 @@ import CartItem from './CartItem';
 // Importing the style file
 import '../css/FilledCart.css'
 
-const FilledCart = ({ cart }) => {
+const FilledCart = ({ cart, onUpdateAmount, onRemoveAll, onRemoveItem }) => {
   return (
     <div className='cart-list'>
         <div className="cart-list-items">
           {cart.line_items.map(item => {
-              return <CartItem key={cart.id} item={item} />
+              return <CartItem key={cart.id} item={item} onUpdateAmount={onUpdateAmount} onRemoveItem={onRemoveItem} />
           })}
         </div>
         <div className="cart-details">
         <h4>Subtotal: {cart.subtotal.formatted_with_code}</h4>
         <div className="buttons">
-          <button className="empty-button">Empty cart</button>
+          <button className="empty-button" onClick={onRemoveAll}>Empty cart</button>
           <button className="checkout">Checkout</button>
         </div>
       </div>
