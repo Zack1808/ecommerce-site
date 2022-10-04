@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 // Importing the costume made components
 import Products from './Products';
 import Navbar from './Navbar';
+import Cart from './Cart';
 
 // importing the commerce api
 import { commerce } from '../api/commerce'
@@ -33,8 +34,6 @@ const App = () => {
         setCart(item);
     }
 
-    console.log(cart)
-
     // Function that will fetch the products
     const fetchProducts = async() => {
         const { data } = await commerce.products.list();
@@ -45,6 +44,7 @@ const App = () => {
         <div className='container'>
             <Navbar totalItems={cart.total_items} />
             <Products products={products} onAddToCart={handleCartAdding}  />
+            <Cart cart={cart} />
         </div>
     )
 }

@@ -16,7 +16,7 @@ const Navbar = ({ totalItems }) => {
                 <img src={logo} alt="Ecommerce" />
                 <h4>Ecommerce</h4>
             </div>
-            <div className="buttons">
+            <div className="navbar-buttons">
                 <button>
                     <Badge badgeContent={totalItems} color="secondary">
                         <ShoppingCart />
