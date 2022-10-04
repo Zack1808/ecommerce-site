@@ -9,9 +9,18 @@ import '../css/FilledCart.css'
 const FilledCart = ({ cart }) => {
   return (
     <div className='cart-list'>
-        {cart.line_items.map(item => {
-            return <CartItem key={cart.id} item={item} />
-        })}
+        <div className="cart-list-items">
+          {cart.line_items.map(item => {
+              return <CartItem key={cart.id} item={item} />
+          })}
+        </div>
+        <div className="cart-details">
+        <h4>Subtotal: {cart.subtotal.formatted_with_code}</h4>
+        <div className="buttons">
+          <button className="empty-button">Empty cart</button>
+          <button className="checkout">Checkout</button>
+        </div>
+      </div>
     </div>
   )
 }
