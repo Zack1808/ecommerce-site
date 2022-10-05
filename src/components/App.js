@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Products from './Products';
 import Navbar from './Navbar';
 import Cart from './Cart';
+import Checkout from './Checkout';
 
 // importing the commerce api
 import { commerce } from '../api/commerce'
@@ -66,6 +67,7 @@ const App = () => {
                 <Routes>
                     <Route exact path='/' element={<Products products={products} onAddToCart={handleCartAdding} />}/>
                     <Route path="/cart" element={<Cart cart={cart} onUpdateAmount={handleAmountUpdate} onRemoveItem={handleRemoveItem} onRemoveAll={handleRemoveAll} />} />
+                    <Route path="/checkout" element={<Checkout />} />
                 </Routes>
             </div>
         </BrowserRouter>

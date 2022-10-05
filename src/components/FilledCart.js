@@ -5,6 +5,7 @@ import CartItem from './CartItem';
 
 // Importing the style file
 import '../css/FilledCart.css'
+import { Link } from 'react-router-dom';
 
 const FilledCart = ({ cart, onUpdateAmount, onRemoveAll, onRemoveItem }) => {
   return (
@@ -18,7 +19,7 @@ const FilledCart = ({ cart, onUpdateAmount, onRemoveAll, onRemoveItem }) => {
         <h4>Subtotal: {cart.subtotal.formatted_with_code}</h4>
         <div className="buttons">
           <button className="empty-button" onClick={onRemoveAll}>Empty cart</button>
-          <button className="checkout">Checkout</button>
+          <Link to="/checkout" className="checkout">Checkout</Link>
         </div>
       </div>
     </div>

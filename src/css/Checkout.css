@@ -1,0 +1,25 @@
+.checkout-container {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.checkout-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+    max-width: 95%;
+    box-shadow: 0 0 10px #aaa;
+    border-radius: 10px;
+    padding: 20px 0;
+}
+
+.stepper {
+    width: 90%;
+    padding: 20px 0;
+}
