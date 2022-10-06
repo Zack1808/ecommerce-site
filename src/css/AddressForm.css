@@ -14,9 +14,22 @@
 form {
     width: 100%;
     padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .field-container {
-    width: 100%;
+    width: 48%;
     margin: 0 0 20px
+}
+
+.field-container:last-child{
+    width: 100%;
+}
+
+@media (max-width: 600px ) {
+    .field-container {
+        width: 100%;
+    }
 }

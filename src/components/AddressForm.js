@@ -1,4 +1,5 @@
 import React from 'react'
+import { InputLabel, Select, MenuItem } from '@mui/material';
 import { useForm, FormProvider } from 'react-hook-form';
 
 // Importing the costume made components
@@ -34,6 +35,24 @@ const AddressForm = () => {
                     </div>
                     <div className="field-container">
                         <InputField required name="ZIP" label="ZIP / Postal code" />
+                    </div>
+                    <div className="field-container">
+                        <InputLabel>Shipping Country</InputLabel>
+                        <Select value="" fullWidth onChange="" variant='filled'>
+                            <MenuItem key="" value=""></MenuItem>
+                        </Select>
+                    </div>
+                    <div className="field-container">
+                        <InputLabel>Shipping Region</InputLabel>
+                        <Select value="" fullWidth onChange="" variant='filled'>
+                            <MenuItem key="" value=""></MenuItem>
+                        </Select>
+                    </div>
+                    <div className="field-container">
+                        <InputLabel>Shipping Options</InputLabel>
+                        <Select value="" fullWidth onChange="" variant='filled'>
+                            <MenuItem key="" value=""></MenuItem>
+                        </Select>
                     </div>
                 </form>
             </FormProvider>
