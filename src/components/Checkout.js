@@ -9,6 +9,7 @@ import Confirmation from './Confirmation';
 
 // Importing the style file
 import '../css/Checkout.css';
+import Loader from './Loader';
 
 const Checkout = ({ cart }) => {
 
@@ -28,10 +29,13 @@ const Checkout = ({ cart }) => {
       }
     }
     generateToken()
-  }, [])
+  }, [cart])
 
   // "Component" that will display the right form depending on which step the user currently is
   const Form = () => activeStep === 0 ? <AddressForm checkoutToken={checkoutToken} /> : <PaymentForm />
+
+  // Will display the loader if the checkout token has not been created yet
+  if(!checkoutToken) return <Loader />
 
   return (
     <div className="checkout-container">

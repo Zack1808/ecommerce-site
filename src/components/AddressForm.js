@@ -13,21 +13,35 @@ import '../css/AddressForm.css';
 const AddressForm = ({ checkoutToken }) => {
 
     const [shippingCountries, setShippingCountries] = useState([]);
-    const [shippingCountrie, setShippingCountrie] = useState("");
+    const [shippingCountry, setShippingCountry] = useState("");
     const [shippingRegions, setShippingRegions] = useState([]);
     const [shippingRegion, setShippingRegion] = useState("");
     const [shippingOptions, setShippingOptions] = useState([]);
     const [shippingOption, setShippingOption] = useState("");
 
+    const countries = Object.entries(shippingCountries).map(([ code, name ]) => ({ id: code, label: name }));
+    const regions = Object.entries(shippingRegions).map(([ code, name ]) => ({ id: code, label: name }));
+
     useEffect(() => {
         fetchShippingCountries(checkoutToken);
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if(shippingCountry) fetchRegions(shippingCountry)
+    }, [shippingCountry])
 
     // Function that will get all the countries to which the items can be shipped
     const fetchShippingCountries = async (checkoutToken) => {
         const { countries } = await commerce.services.localeListShippingCountries(checkoutToken);
-        console.log(countries)
-        setShippingCountries(countries)
+        setShippingCountries(countries);
+        setShippingCountry(Object.keys(countries)[0])
+    }
+
+    // Function that will fetch all regions of a country
+    const fetchRegions = async (countryCode) => {
+        const { subdivisions}  = await commerce.services.localeListSubdivisions(countryCode);
+        setShippingRegions(subdivisions);
+        setShippingRegion(Object.keys(subdivisions)[0])
     }
 
     const methods = useForm();
@@ -57,20 +71,27 @@ const AddressForm = ({ checkoutToken }) => {
                     </div>
                     <div className="field-container">
                         <InputLabel>Shipping Country</InputLabel>
-                        <Select value="" fullWidth onChange="" variant='filled'>
-                            <MenuItem key="" value=""></MenuItem>
+                        <Select value={shippingCountry} fullWidth onChange={e => setShippingCountry(e.target.value)} variant='filled'>
+                            {countries.map(country => {
+                                return <MenuItem key={country.id} value={country.id}>{country.label}</MenuItem>
+                            })}
+                            
                         </Select>
                     </div>
                     <div className="field-container">
                         <InputLabel>Shipping Region</InputLabel>
-                        <Select value="" fullWidth onChange="" variant='filled'>
-                            <MenuItem key="" value=""></MenuItem>
+                        <Select value={shippingRegion} fullWidth onChange={e => setShippingRegion(e.target.value)} variant='filled'>
+                            {regions.map(region =>{
+                                return <MenuItem key={region.id} value={region.id}>{region.label}</MenuItem>
+                            })}
                         </Select>
                     </div>
                     <div className="field-container">
                         <InputLabel>Shipping Options</InputLabel>
-                        <Select value="" fullWidth onChange="" variant='filled'>
-                            <MenuItem key="" value=""></MenuItem>
+                        <Select value={shippingRegion} fullWidth onChange={e => setShippingRegion(e.target.value)} variant='filled'>
+                            {regions.map(region =>{
+                                return <MenuItem key={region.id} value={region.id}>{region.label}</MenuItem>
+                            })}
                         </Select>
                     </div>
                 </form>
