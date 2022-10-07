@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { InputLabel, Select, MenuItem } from '@mui/material';
 import { useForm, FormProvider } from 'react-hook-form';
 import { commerce } from '../api/commerce';
+import { Link } from 'react-router-dom'
 
 // Importing the costume made components
 import InputField from './InputField';
@@ -64,48 +65,55 @@ const AddressForm = ({ checkoutToken }) => {
             <h2>Shipping Address</h2>
             <FormProvider {...methods}>
                 <form onSubmit="">
-                    <div className="field-container">
-                        <InputField required name="firstName" label="First name" />
+                    <div className="input-container">
+                        <div className="field-container">
+                            <InputField required name="firstName" label="First name" />
+                        </div>
+                        <div className="field-container">
+                            <InputField required name="lastName" label="Last name" />
+                        </div>
+                        <div className="field-container">
+                            <InputField required name="address1" label="Address" />
+                        </div>
+                        <div className="field-container">
+                            <InputField required name="email" label="E-mail" />
+                        </div>
+                        <div className="field-container">
+                            <InputField required name="city" label="City" />
+                        </div>
+                        <div className="field-container">
+                            <InputField required name="ZIP" label="ZIP / Postal code" />
+                        </div>
+                        <div className="field-container">
+                            <InputLabel>Shipping Country</InputLabel>
+                            <Select value={shippingCountry} fullWidth onChange={e => setShippingCountry(e.target.value)} variant='filled'>
+                                {countries.map(country => {
+                                    return <MenuItem key={country.id} value={country.id}>{country.label}</MenuItem>
+                                })}
+                                
+                            </Select>
+                        </div>
+                        <div className="field-container">
+                            <InputLabel>Shipping Region</InputLabel>
+                            <Select value={shippingRegion} fullWidth onChange={e => setShippingRegion(e.target.value)} variant='filled'>
+                                {regions.map(region =>{
+                                    return <MenuItem key={region.id} value={region.id}>{region.label}</MenuItem>
+                                })}
+                            </Select>
+                        </div>
+                        <div className="field-container">
+                            <InputLabel>Shipping Options</InputLabel>
+                            <Select value={shippingOption} fullWidth onChange={e => setShippingOption(e.target.value)} variant='filled'>
+                                {options.map(option =>{
+                                    return <MenuItem key={option.id} value={option.id}>{option.label}</MenuItem>
+                                })}
+                            </Select>
+                        </div>
                     </div>
-                    <div className="field-container">
-                        <InputField required name="lastName" label="Last name" />
-                    </div>
-                    <div className="field-container">
-                        <InputField required name="address1" label="Address" />
-                    </div>
-                    <div className="field-container">
-                        <InputField required name="email" label="E-mail" />
-                    </div>
-                    <div className="field-container">
-                        <InputField required name="city" label="City" />
-                    </div>
-                    <div className="field-container">
-                        <InputField required name="ZIP" label="ZIP / Postal code" />
-                    </div>
-                    <div className="field-container">
-                        <InputLabel>Shipping Country</InputLabel>
-                        <Select value={shippingCountry} fullWidth onChange={e => setShippingCountry(e.target.value)} variant='filled'>
-                            {countries.map(country => {
-                                return <MenuItem key={country.id} value={country.id}>{country.label}</MenuItem>
-                            })}
-                            
-                        </Select>
-                    </div>
-                    <div className="field-container">
-                        <InputLabel>Shipping Region</InputLabel>
-                        <Select value={shippingRegion} fullWidth onChange={e => setShippingRegion(e.target.value)} variant='filled'>
-                            {regions.map(region =>{
-                                return <MenuItem key={region.id} value={region.id}>{region.label}</MenuItem>
-                            })}
-                        </Select>
-                    </div>
-                    <div className="field-container">
-                        <InputLabel>Shipping Options</InputLabel>
-                        <Select value={shippingOption} fullWidth onChange={e => setShippingOption(e.target.value)} variant='filled'>
-                            {options.map(option =>{
-                                return <MenuItem key={option.id} value={option.id}>{option.label}</MenuItem>
-                            })}
-                        </Select>
+
+                    <div className="form-buttons">
+                        <Link to="/cart">Back to cart</Link >
+                        <button type="submit">Next Step</button>
                     </div>
                 </form>
             </FormProvider>
