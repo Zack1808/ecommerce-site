@@ -11,7 +11,7 @@ import InputField from './InputField';
 import '../css/AddressForm.css';
 
 // Creating the AddressForm component
-const AddressForm = ({ checkoutToken }) => {
+const AddressForm = ({ checkoutToken, submit }) => {
 
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState("");
@@ -64,7 +64,7 @@ const AddressForm = ({ checkoutToken }) => {
         <div className="address-form">
             <h2>Shipping Address</h2>
             <FormProvider {...methods}>
-                <form onSubmit="">
+                <form onSubmit={methods.handleSubmit((data) => submit({ ...data, shippingCountry, shippingRegion, shippingOption }))}>
                     <div className="input-container">
                         <div className="field-container">
                             <InputField required name="firstName" label="First name" />

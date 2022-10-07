@@ -46,6 +46,7 @@ form {
 .form-buttons a  {
     text-decoration: none;
     color: #000;
+    font-size: calc(.7em + .7vw);
     padding: 10px 15px;
     border-radius: 10px;
     border: 2px solid #000;

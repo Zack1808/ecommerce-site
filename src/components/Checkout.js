@@ -17,6 +17,7 @@ const Checkout = ({ cart }) => {
 
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
+  const [shippingData, setShippingData] = useState([]);
 
   useEffect(() => {
     const generateToken = async() =>{
@@ -29,10 +30,15 @@ const Checkout = ({ cart }) => {
       }
     }
     generateToken()
-  }, [cart])
+  }, [cart]);
+
+  const next = (data) => {
+    setShippingData(data);
+    setActiveStep(activeStep + 1)
+  } 
 
   // "Component" that will display the right form depending on which step the user currently is
-  const Form = () => activeStep === 0 ? <AddressForm checkoutToken={checkoutToken} /> : <PaymentForm />
+  const Form = () => activeStep === 0 ? <AddressForm checkoutToken={checkoutToken} submit={next} /> : <PaymentForm />
 
   // Will display the loader if the checkout token has not been created yet
   if(!checkoutToken) return <Loader />
