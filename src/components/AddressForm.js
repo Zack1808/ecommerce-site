@@ -21,6 +21,7 @@ const AddressForm = ({ checkoutToken }) => {
 
     const countries = Object.entries(shippingCountries).map(([ code, name ]) => ({ id: code, label: name }));
     const regions = Object.entries(shippingRegions).map(([ code, name ]) => ({ id: code, label: name }));
+    const options = shippingOptions.map(sO => ({ id: sO.id, label: `${sO.description} - ${sO.price.formatted_with_code}`}));
 
     useEffect(() => {
         fetchShippingCountries(checkoutToken);
@@ -28,7 +29,11 @@ const AddressForm = ({ checkoutToken }) => {
 
     useEffect(() => {
         if(shippingCountry) fetchRegions(shippingCountry)
-    }, [shippingCountry])
+    }, [shippingCountry]);
+
+    useEffect(() => {
+        if(shippingRegion) fetchOptions(checkoutToken, shippingCountry, shippingRegion);
+    }, [shippingRegion])
 
     // Function that will get all the countries to which the items can be shipped
     const fetchShippingCountries = async (checkoutToken) => {
@@ -43,6 +48,14 @@ const AddressForm = ({ checkoutToken }) => {
         setShippingRegions(subdivisions);
         setShippingRegion(Object.keys(subdivisions)[0])
     }
+
+    // Function that will fetch the shipping options for the specific country and region
+    const fetchOptions = async (checkoutToken, country, region) => {
+        const options  = await commerce.checkout.getShippingOptions(checkoutToken, { country, region });
+        setShippingOptions(options);
+        setShippingOption(options[0].id)
+    }
+
 
     const methods = useForm();
 
@@ -88,9 +101,9 @@ const AddressForm = ({ checkoutToken }) => {
                     </div>
                     <div className="field-container">
                         <InputLabel>Shipping Options</InputLabel>
-                        <Select value={shippingRegion} fullWidth onChange={e => setShippingRegion(e.target.value)} variant='filled'>
-                            {regions.map(region =>{
-                                return <MenuItem key={region.id} value={region.id}>{region.label}</MenuItem>
+                        <Select value={shippingOption} fullWidth onChange={e => setShippingOption(e.target.value)} variant='filled'>
+                            {options.map(option =>{
+                                return <MenuItem key={option.id} value={option.id}>{option.label}</MenuItem>
                             })}
                         </Select>
                     </div>
