@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { InputLabel, Select, MenuItem } from '@mui/material';
 import { useForm, FormProvider } from 'react-hook-form';
+import { commerce } from '../api/commerce';
 
 // Importing the costume made components
 import InputField from './InputField';
@@ -9,7 +10,25 @@ import InputField from './InputField';
 import '../css/AddressForm.css';
 
 // Creating the AddressForm component
-const AddressForm = () => {
+const AddressForm = ({ checkoutToken }) => {
+
+    const [shippingCountries, setShippingCountries] = useState([]);
+    const [shippingCountrie, setShippingCountrie] = useState("");
+    const [shippingRegions, setShippingRegions] = useState([]);
+    const [shippingRegion, setShippingRegion] = useState("");
+    const [shippingOptions, setShippingOptions] = useState([]);
+    const [shippingOption, setShippingOption] = useState("");
+
+    useEffect(() => {
+        fetchShippingCountries(checkoutToken);
+    }, [])
+
+    // Function that will get all the countries to which the items can be shipped
+    const fetchShippingCountries = async (checkoutToken) => {
+        const { countries } = await commerce.services.localeListShippingCountries(checkoutToken);
+        console.log(countries)
+        setShippingCountries(countries)
+    }
 
     const methods = useForm();
 

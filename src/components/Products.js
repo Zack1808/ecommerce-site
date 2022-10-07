@@ -10,8 +10,6 @@ import "../css/Products.css"
 // Creating the Products component
 const Products = ({ products, onAddToCart }) => {
 
-    console.log(products)
-
     if(products.length === 0) return <Loader />
 
     return (
