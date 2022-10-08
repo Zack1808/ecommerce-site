@@ -32,13 +32,18 @@ const Checkout = ({ cart }) => {
     generateToken()
   }, [cart]);
 
+  // Function that will lead the user to the payment form
   const next = (data) => {
     setShippingData(data);
     setActiveStep(activeStep + 1)
   } 
 
+  const back = () => {
+    setActiveStep(activeStep - 1);
+  }
+
   // "Component" that will display the right form depending on which step the user currently is
-  const Form = () => activeStep === 0 ? <AddressForm checkoutToken={checkoutToken} submit={next} /> : <PaymentForm />
+  const Form = () => activeStep === 0 ? <AddressForm checkoutToken={checkoutToken} submit={next} /> : <PaymentForm shippingData={shippingData} checkoutToken={checkoutToken} goBack={back} />
 
   // Will display the loader if the checkout token has not been created yet
   if(!checkoutToken) return <Loader />
