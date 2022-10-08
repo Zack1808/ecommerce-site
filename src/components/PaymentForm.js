@@ -18,7 +18,6 @@ const PaymentForm = ({ shippingData, checkoutToken, goBack,  onCaptureCheckout, 
     if(!stripe || !elements) return;
     const cardElement = elements.getElement(CardElement);
     const { error, paymentMethod } = await stripe.createPaymentMethod({ type: 'card', card: cardElement})
-    console.log(paymentMethod)
     if(error) console.log(error)
     else {
       const orderData = {

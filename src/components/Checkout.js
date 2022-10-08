@@ -26,7 +26,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
         setCheckoutToken(token)
       }
       catch (error) {
-
+        console.log(error)
       }
     }
     generateToken()
@@ -56,7 +56,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
           {steps.map(step => ( <Step key={step}><StepLabel>{step}</StepLabel></Step>
           ))}
         </Stepper>
-        {activeStep === steps.length ? <Confirmation /> : <Form />}
+        {activeStep === steps.length ? <Confirmation order={order} error={error} /> : <Form />}
       </main>
     </div>
   )

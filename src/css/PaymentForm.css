@@ -27,10 +27,15 @@
     font-size: calc(.7em + .7vw);
     border-radius: 10px;
     border: none;
+    transition: transform .5s
 }
 
 .payment-form-buttons button:first-child {
     background-color: rgb(67, 67, 222)
+}
+
+.payment-form-buttons button:hover{
+    transform: scale(1.1);
 }
 
 .payment-form form {
