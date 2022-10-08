@@ -11,7 +11,7 @@ import Confirmation from './Confirmation';
 import '../css/Checkout.css';
 import Loader from './Loader';
 
-const Checkout = ({ cart }) => {
+const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
 
   const steps = ['Shipping adress', 'Payment details']
 
@@ -43,7 +43,7 @@ const Checkout = ({ cart }) => {
   }
 
   // "Component" that will display the right form depending on which step the user currently is
-  const Form = () => activeStep === 0 ? <AddressForm checkoutToken={checkoutToken} submit={next} /> : <PaymentForm shippingData={shippingData} checkoutToken={checkoutToken} goBack={back} />
+  const Form = () => activeStep === 0 ? <AddressForm checkoutToken={checkoutToken} submit={next} /> : <PaymentForm shippingData={shippingData} checkoutToken={checkoutToken} goBack={back} onCaptureCheckout={onCaptureCheckout} setNextStep={setActiveStep} currentStep={activeStep} />
 
   // Will display the loader if the checkout token has not been created yet
   if(!checkoutToken) return <Loader />

@@ -10,37 +10,64 @@ import '../css/PaymentForm.css'
 
 const stripePromise = loadStripe('pk_test_51LqcGyEpbrLAgRpbHJFeKtSoPqDQXpffqOGj6aePCGpzy9y23Pp1mJYDpyjeOEzXFwPRUN7xqeJzWcGIvv9oA64C00HL6qNgRt');
 
-const PaymentForm = ({ shippingData, checkoutToken, goBack}) => {
+const PaymentForm = ({ shippingData, checkoutToken, goBack,  onCaptureCheckout, setNextStep, currentStep}) => {
 
-  const CARD_ELEMENT_OPTIONS = {
-    style: {
-      base: {
-        color: "#32325d",
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: "antialiased",
-        innerWidth: "100%",
-        fontSize: "16px",
-        "::placeholder": {
-          color: "#aab7c4",
+  // Function that will handle the submition of the form
+  const handleSubmit = async (e, elements, stripe) => {
+    e.preventDefault();
+    if(!stripe || !elements) return;
+    const cardElement = elements.getElement(CardElement);
+    const { error, paymentMethod } = await stripe.createPaymentMethod({ type: 'card', card: cardElement})
+    console.log(paymentMethod)
+    if(error) console.log(error)
+    else {
+      const orderData = {
+        line_items: checkoutToken.line_items,
+        customer: {
+          firstname: shippingData.firstName,
+          lastname: shippingData.lastName,
+          email: shippingData.email,
         },
-      },
-      invalid: {
-        color: "#fa755a",
-        iconColor: "#fa755a",
-      },
-    },
-  };
+        billing: {
+          name: 'Primary',
+          street: shippingData.address,
+          town_city: shippingData.city,
+          county_state: shippingData.shippingRegion,
+          postal_zip_code: shippingData.zip,
+          country: shippingData.shippingCountry
+        },
+        shipping: {
+          name: 'Primary',
+          street: shippingData.address,
+          town_city: shippingData.city,
+          county_state: shippingData.shippingRegion,
+          postal_zip_code: shippingData.zip,
+          country: shippingData.shippingCountry
+        },
+        fulfillment: { shipping_method: shippingData.shippingOption},
+        payment: {
+          gateway: 'stripe',
+          stripe: {
+            payment_method_id: paymentMethod.id,
+          }
+        }
+      }
+
+      onCaptureCheckout(checkoutToken.id, orderData);
+      setNextStep(currentStep + 1)
+    }
+  }
 
   return (
     <div className='payment-form'>
       <Review checkoutToken={checkoutToken} />
       <hr />
       <h3>Payment Method</h3>
-      <Elements stripe={stripePromise} style={{ border: "1px solid red"}}>
+      <Elements stripe={stripePromise}>
         <ElementsConsumer>
           {({ elements, stripe }) => (
-             <form>
-              <CardElement options={CARD_ELEMENT_OPTIONS} />
+             <form onSubmit={e => handleSubmit(e, elements, stripe)}>
+              <CardElement />
               <br /><br />
               <div className="payment-form-buttons">
                 <button onClick={goBack}>Back</button>

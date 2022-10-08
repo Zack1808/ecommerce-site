@@ -18,6 +18,8 @@ const App = () => {
 
     const [products, setProducts] = useState([]); 
     const [cart, setCart] = useState({});
+    const [order, setOrder] = useState({});
+    const [errMessage, setErrMessage] = useState('');
 
     // Will run the function that will fetch the products
     useEffect(() => {
@@ -54,6 +56,23 @@ const App = () => {
         setCart(item);
     }
 
+    // Function that will clear the cart once an order has been created
+    const refreshCart = async () =>{
+        const newCart = await commerce.cart.refresh();
+        setCart(newCart);
+    }
+
+    // Function that will create the order to the commerce.js api
+    const handleCaptureCheckout = async(tokenId, newOrder) => {
+        try{
+            const incommingOrder = await commerce.checkout.capture(tokenId, newOrder)
+            setOrder(incommingOrder);
+            refreshCart();
+        } catch(error) {
+            setErrMessage(error.data.error.message)
+        }
+    }
+
     // Function that will fetch the products
     const fetchProducts = async() => {
         const { data } = await commerce.products.list();
@@ -67,7 +86,7 @@ const App = () => {
                 <Routes>
                     <Route exact path='/' element={<Products products={products} onAddToCart={handleCartAdding} />}/>
                     <Route path="/cart" element={<Cart cart={cart} onUpdateAmount={handleAmountUpdate} onRemoveItem={handleRemoveItem} onRemoveAll={handleRemoveAll} />} />
-                    <Route path="/checkout" element={<Checkout cart={cart} />} />
+                    <Route path="/checkout" element={<Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errMessage} />} />
                 </Routes>
             </div>
         </BrowserRouter>

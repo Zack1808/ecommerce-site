@@ -19,6 +19,12 @@ const AddressForm = ({ checkoutToken, submit }) => {
     const [shippingRegion, setShippingRegion] = useState("");
     const [shippingOptions, setShippingOptions] = useState([]);
     const [shippingOption, setShippingOption] = useState("");
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [address, setAddress] = useState('');
+    const [email, setEmail] = useState('');
+    const [city, setCity] = useState('');
+    const [zip, setZip] = useState('');
 
     const countries = Object.entries(shippingCountries).map(([ code, name ]) => ({ id: code, label: name }));
     const regions = Object.entries(shippingRegions).map(([ code, name ]) => ({ id: code, label: name }));
@@ -64,25 +70,25 @@ const AddressForm = ({ checkoutToken, submit }) => {
         <div className="address-form">
             <h2>Shipping Address</h2>
             <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit((data) => submit({ ...data, shippingCountry, shippingRegion, shippingOption }))}>
+                <form onSubmit={methods.handleSubmit((data) => submit({ firstName, lastName, address, email, zip, city,  shippingCountry, shippingRegion, shippingOption }))}>
                     <div className="input-container">
                         <div className="field-container">
-                            <InputField required name="firstName" label="First name" />
+                            <InputField required name="firstName" label="First name" value={firstName} onChange={setFirstName} />
                         </div>
                         <div className="field-container">
-                            <InputField required name="lastName" label="Last name" />
+                            <InputField required name="lastName" label="Last name" value={lastName} onChange={setLastName} />
                         </div>
                         <div className="field-container">
-                            <InputField required name="address1" label="Address" />
+                            <InputField required name="address1" label="Address" value={address} onChange={setAddress} />
                         </div>
                         <div className="field-container">
-                            <InputField required name="email" label="E-mail" />
+                            <InputField required name="email" label="E-mail" value={email} onChange={setEmail} />
                         </div>
                         <div className="field-container">
-                            <InputField required name="city" label="City" />
+                            <InputField required name="city" label="City" value={city} onChange={setCity} />
                         </div>
                         <div className="field-container">
-                            <InputField required name="ZIP" label="ZIP / Postal code" />
+                            <InputField required name="ZIP" label="ZIP / Postal code" value={zip} onChange={setZip} />
                         </div>
                         <div className="field-container">
                             <InputLabel>Shipping Country</InputLabel>
