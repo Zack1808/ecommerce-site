@@ -44,7 +44,7 @@ const AddressForm = ({ checkoutToken, submit }) => {
 
     // Function that will get all the countries to which the items can be shipped
     const fetchShippingCountries = async (checkoutToken) => {
-        const { countries } = await commerce.services.localeListShippingCountries(checkoutToken);
+        const { countries } = await commerce.services.localeListShippingCountries(checkoutToken.id);
         setShippingCountries(countries);
         setShippingCountry(Object.keys(countries)[0])
     }
@@ -58,7 +58,8 @@ const AddressForm = ({ checkoutToken, submit }) => {
 
     // Function that will fetch the shipping options for the specific country and region
     const fetchOptions = async (checkoutToken, country, region) => {
-        const options  = await commerce.checkout.getShippingOptions(checkoutToken, { country, region });
+        const options  = await commerce.checkout.getShippingOptions(checkoutToken.id, { country, region });
+        console.log(checkoutToken)
         setShippingOptions(options);
         setShippingOption(options[0].id)
     }
